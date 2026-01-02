@@ -1,10 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-$END$
+<div class="app-container">
+    <header class="app-header">
+        <div class="header-content">
+            <h1><i class="fas fa-tasks"></i> Task Manager</h1>
+            <a href="/swagger-ui.html">swagger-ui</a>
+            <div class="header-actions">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Поиск задач...">
+                </div>
+                <button id="refreshBtn" class="btn btn-secondary">
+                    <i class="fas fa-sync-alt"></i> Обновить
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <aside class="sidebar">
+            <div class="stats-card">
+                <h3><i class="fas fa-chart-bar"></i> Статистика</h3>
+                <div id="statsContent">
+                    <p>Загрузка...</p>
+                </div>
+            </div>
+            <div class="filters-card">
+                <h3><i class="fas fa-filter"></i> Фильтры</h3>
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" id="filterRecent" checked>
+                        <span>Последние задачи</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" id="filterImportant" checked>
+                        <span>Важные</span>
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <section class="content-area">
+            <div class="tasks-header">
+                <h2>Список задач <span id="tasksCount" class="badge">0</span></h2>
+                <div class="view-options">
+                    <button id="expandAll" class="btn btn-small">
+                        <i class="fas fa-expand-alt"></i> Развернуть все
+                    </button>
+                    <button id="collapseAll" class="btn btn-small">
+                        <i class="fas fa-compress-alt"></i> Свернуть все
+                    </button>
+                </div>
+            </div>
+
+            <div id="loadingIndicator" class="loading-indicator">
+                <div class="spinner"></div>
+                <p>Загрузка задач...</p>
+            </div>
+
+            <div id="tasksContainer" class="tasks-container">
+                <!-- Задачи будут загружены через JS -->
+            </div>
+
+            <div id="errorMessage" class="error-message hidden">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Ошибка загрузки задач. Попробуйте обновить страницу.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>Task Manager &copy; 2024 | Загружено задач: <span id="footerCount">0</span></p>
+    </footer>
+</div>
+
+<div id="taskModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle"></h3>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <pre id="modalContent"></pre>
+        </div>
+        <div class="modal-footer">
+            <small id="modalMeta"></small>
+        </div>
+    </div>
+</div>
+
+<script src="/js/app.js" type="module"></script>
 </body>
 </html>
